@@ -11,10 +11,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TestePage } from '../pages/teste/teste';
 import { LoginOptionsPage } from '../pages/login-options/login-options';
+import { CustomerCreatePage } from '../pages/customer-create/customer-create';
+
 import { ResetPhoneNumberPage } from '../pages/reset-phone-number/reset-phone-number';
 import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CustomerHttpProvider } from '../providers/http/customer-http';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPhoneNumberPage,
     ResetPhoneNumberPage,
     MainPage,
+    CustomerCreatePage,
     HomePage,
     ListPage,
     TestePage,
@@ -31,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPhoneNumberPage,
     ResetPhoneNumberPage,
     MainPage,
+    CustomerCreatePage,
     HomePage,
     ListPage,
     TestePage
@@ -49,7 +56,8 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseAuthProvider,
-    AuthProvider
+    AuthProvider,
+    CustomerHttpProvider
   ]
 })
 export class AppModule {}

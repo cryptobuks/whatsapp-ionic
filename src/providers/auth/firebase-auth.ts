@@ -18,6 +18,8 @@ declare const firebaseui;
 @Injectable()
 export class FirebaseAuthProvider {
 
+  private ui;
+
   constructor() {
     firebase.initializeApp(firebaseConfig);
   }
@@ -34,24 +36,27 @@ export class FirebaseAuthProvider {
    * depois que a promessa foi resolvida.
    * @param selectorElement 
    */
-  async makePhoneNumberForm(selectorElement: string){
-    const firibaseui = await this.getFirebaseUI().then();
-    // proximas linhas 
-    const uiConfig = {
-      signInOptions: [
-        firebase.auth.PhoneAuthProvider.PROVIDER_ID
-      ],
-      callbacks: {
-        signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-            //console.log(authResult);
-            //console.log(redirectUrl);
-            return false;
+  async makePhoneNumberForm(selectorElement: string): Promise<any>{
+    await this.getFirebaseUI();
+    return new Promise((resolve) => {      
+      // proximas linhas 
+      const uiConfig = {
+        signInOptions: [
+          firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+          signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+              //console.log(authResult);
+              //console.log(redirectUrl);
+              resolve(true);
+              return false;
+          }
         }
-    }
-    }
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start(selectorElement, uiConfig);
-}
+      }
+      this.makeFormFirebaseUi(selectorElement, uiConfig)
+  
+    });
+  }
 
   /**
    * Carregar script de tradução para pt
@@ -82,6 +87,19 @@ export class FirebaseAuthProvider {
       return Promise.reject(e);
     }
   }
+
+  private makeFormFirebaseUi(selectorElement, uiConfig){
+    if (!this.ui) {
+      this.ui = new firebaseui.auth.AuthUI(firebase.auth());
+      this.ui.start(selectorElement, uiConfig);
+    } else {
+      this.ui.delete().then(() => {
+        this.ui = new firebaseui.auth.AuthUI(firebase.auth());
+        this.ui.start(selectorElement, uiConfig);  
+      })
+    }
+  }
+
 
   /**
    * Retorna dados do user no callback 
