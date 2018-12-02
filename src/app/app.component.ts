@@ -8,9 +8,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { TestePage } from '../pages/teste/teste';
-import { LoginOptionsPage } from '../pages/login-options/login-options';
-import { LoginPhoneNumberPage } from './../pages/login-phone-number/login-phone-number';
-import { CustomerCreatePage } from '../pages/customer-create/customer-create';
 
 
 @Component({

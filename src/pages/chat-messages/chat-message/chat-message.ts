@@ -1,5 +1,8 @@
+import { Observable } from 'rxjs/Observable';
+import { FirebaseAuthProvider } from './../../../providers/auth/firebase-auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ChatMenssage } from '../../../app/model';
 
 /**
  * Generated class for the ChatMessagePage page.
@@ -15,11 +18,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatMessagePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  messages: ChatMenssage[] = [];
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private firebaseAuth: FirebaseAuthProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatMessagePage');
+
+    const database = this.firebaseAuth.firebase.database();
+    database.ref('chat_groups/1/messages').on('child_added', (data) => {
+      const message = data.val();
+      message.user = Observable.create((observer) => {
+        database.ref(`users/${message.user_id}`).on('value', (data) => {
+          //mensage.name
+          const user = data.val();
+          observer.next(user);
+
+          //console.log(message);
+        });
+      });
+
+      message.user.subscribe((user) => console.log(user));
+      this.messages.push(message);
+
+    });
+
   }
 
 }

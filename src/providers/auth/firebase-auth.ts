@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import firebaseConfig from '../../app/firebase-config';
 import * as firebase from 'firebase';
 import scriptjs from 'scriptjs';
-import { filterQueryId } from '@angular/core/src/view/util';
+
 
 declare const firebaseui;
 //firebase reconhecer window

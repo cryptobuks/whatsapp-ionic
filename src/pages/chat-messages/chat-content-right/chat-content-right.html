@@ -2,11 +2,11 @@
 <ion-row>
     
     <ion-col col-9 col-sm-10 col-lg-11 col-x1-11>
-      <chat-content-detail></chat-content-detail>
+      <chat-content-detail [message]="message"></chat-content-detail>
     </ion-col>
 
     <ion-col col-3 col-sm-2 col-lg-1 col-x1-1>
-      <chat-avatar></chat-avatar>
+      <chat-avatar position="start" [photo]="(message.user|async)?.photo_url"></chat-avatar>
     </ion-col>
   
   

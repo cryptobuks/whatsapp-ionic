@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+const DEFAULT_PHOTO_URL = 'https://www.gravatar.com/avatar/nouser.jpg';
 
 /**
  * Generated class for the ChatAvatarComponent component.
@@ -11,12 +13,23 @@ import { Component } from '@angular/core';
   templateUrl: 'chat-avatar.html'
 })
 export class ChatAvatarComponent {
+  
+  private _photo: string = DEFAULT_PHOTO_URL;
+  @Input()
+  position: string;
 
-  text: string;
+  constructor() { }
 
-  constructor() {
-    console.log('Hello ChatAvatarComponent Component');
-    this.text = 'Hello World';
+  @Input()
+  set photo(value){
+    if(!value){
+      this._photo =  DEFAULT_PHOTO_URL;
+    }
+    this._photo = value;
+  }
+
+  get photo(){
+    return this._photo;
   }
 
 }

@@ -2,6 +2,9 @@ import { LoginPhoneNumberPage } from './../pages/login-phone-number/login-phone-
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { AuthProvider } from '../providers/auth/auth';
+
 
 import { SuperTabsModule } from 'ionic2-super-tabs';
 
@@ -17,12 +20,24 @@ import { CustomerCreatePage } from '../pages/customer-create/customer-create';
 
 import { ResetPhoneNumberPage } from '../pages/reset-phone-number/reset-phone-number';
 import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
-import { AuthProvider } from '../providers/auth/auth';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerHttpProvider } from '../providers/http/customer-http';
 import { ChatGroupListComponent } from '../components/chat-group-list/chat-group-list';
 import { ChatMessagePageModule } from '../pages/chat-messages/chat-message/chat-message.module';
+
+function jwtFactory(authService: AuthProvider) {
+  return {
+      whitelistedDomains: [
+        new RegExp('whatsapp-laravel.test/*')
+      ],
+      tokenGetter: () => {
+        return authService.getToken();
+      }
+  }
+}
+
+
 
 @NgModule({
   declarations: [
@@ -44,7 +59,14 @@ import { ChatMessagePageModule } from '../pages/chat-messages/chat-message/chat-
     HttpClientModule,
     ReactiveFormsModule,
     SuperTabsModule.forRoot(),
-    ChatMessagePageModule
+    ChatMessagePageModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtFactory,
+        deps: [AuthProvider]
+      }
+    })
     
   ],
   bootstrap: [IonicApp],
