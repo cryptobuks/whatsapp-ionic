@@ -54,7 +54,7 @@ export class LoginPhoneNumberPage {
   }
 
   redirectCustumerCreatePage(){
-    this.navCtrl.push(CustomerCreatePage)
+    this.navCtrl.push(MainPage)
   }
 
 

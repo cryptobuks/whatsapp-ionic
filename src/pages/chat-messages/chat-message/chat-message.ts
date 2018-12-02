@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ChatGroupListComponent } from '../../components/chat-group-list/chat-group-list';
 
 /**
- * Generated class for the MainPage page.
+ * Generated class for the ChatMessagePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,18 +10,16 @@ import { ChatGroupListComponent } from '../../components/chat-group-list/chat-gr
 
 @IonicPage()
 @Component({
-  selector: 'page-main',
-  templateUrl: 'main.html',
+  selector: 'page-chat-message',
+  templateUrl: 'chat-message.html',
 })
-export class MainPage {
-
-  chatGroupList = ChatGroupListComponent;
+export class ChatMessagePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MainPage');
+    console.log('ionViewDidLoad ChatMessagePage');
   }
 
 }

@@ -1,3 +1,5 @@
+import { ChatMessagePage } from './../pages/chat-messages/chat-message/chat-message';
+import { MainPage } from './../pages/main/main';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -10,6 +12,7 @@ import { LoginOptionsPage } from '../pages/login-options/login-options';
 import { LoginPhoneNumberPage } from './../pages/login-phone-number/login-phone-number';
 import { CustomerCreatePage } from '../pages/customer-create/customer-create';
 
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -20,7 +23,7 @@ export class MyApp {
   /**
    * Página inicial
    */
-  rootPage: any = LoginOptionsPage;
+  rootPage: any = ChatMessagePage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -31,7 +34,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: 'Teste', component: TestePage }
+      { title: 'Teste', component: TestePage },
+      { title: 'Página Principal', component: MainPage }
     ];
 
   }

@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { SuperTabsModule } from 'ionic2-super-tabs';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -19,6 +21,8 @@ import { AuthProvider } from '../providers/auth/auth';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerHttpProvider } from '../providers/http/customer-http';
+import { ChatGroupListComponent } from '../components/chat-group-list/chat-group-list';
+import { ChatMessagePageModule } from '../pages/chat-messages/chat-message/chat-message.module';
 
 @NgModule({
   declarations: [
@@ -31,12 +35,17 @@ import { CustomerHttpProvider } from '../providers/http/customer-http';
     HomePage,
     ListPage,
     TestePage,
+    ChatGroupListComponent,
+
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SuperTabsModule.forRoot(),
+    ChatMessagePageModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,7 +57,9 @@ import { CustomerHttpProvider } from '../providers/http/customer-http';
     CustomerCreatePage,
     HomePage,
     ListPage,
-    TestePage
+    TestePage,
+    ChatGroupListComponent,
+
 
   ],
   providers: [
