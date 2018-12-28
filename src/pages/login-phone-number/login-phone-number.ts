@@ -1,4 +1,6 @@
-import { MainPage } from './../main/main';
+//import { LoginOptionsPage } from './../login-options/login-options';
+import { ChatMessagePage } from './../chat-messages/chat-message/chat-message';
+//import { MainPage } from './../main/main';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
@@ -37,7 +39,7 @@ export class LoginPhoneNumberPage {
       .login()
       .subscribe((token) => {
         // Abre na página principal
-        this.redirectToMainPage();
+        //this.redirectToMainPage();
       }, (responseError) => {
         // Redireciona para criação da conta com o firebaseui-form
         this.firebaseAuth
@@ -49,11 +51,11 @@ export class LoginPhoneNumberPage {
   }
 
   redirectToMainPage(){
-    this.navCtrl.setRoot(MainPage);
+    this.navCtrl.setRoot(ChatMessagePage);
   }
 
   redirectCustumerCreatePage(){
-    this.navCtrl.push(MainPage)
+    this.navCtrl.push(ChatMessagePage)
   }
 
 

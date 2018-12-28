@@ -35,12 +35,11 @@ export class ChatMessagePage {
           //mensage.name
           const user = data.val();
           observer.next(user);
-
           //console.log(message);
         });
       });
 
-      message.user.subscribe((user) => console.log(user));
+      //message.user.subscribe((user) => console.log(user));
       this.messages.push(message);
 
     });

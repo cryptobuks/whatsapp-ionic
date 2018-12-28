@@ -1,5 +1,3 @@
-import { ChatMessagePage } from './../pages/chat-messages/chat-message/chat-message';
-import { MainPage } from './../pages/main/main';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -8,6 +6,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { TestePage } from '../pages/teste/teste';
+
+import { MainPage } from './../pages/main/main';
+import { ChatMessagePage } from './../pages/chat-messages/chat-message/chat-message';
+//import { LoginPhoneNumberPage } from './../pages/login-phone-number/login-phone-number';
 
 
 @Component({
