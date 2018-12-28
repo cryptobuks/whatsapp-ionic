@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { flatMap } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { environment } from '@app/env';
+
 
 interface Customer {
   name: string, 
@@ -23,7 +25,7 @@ export class CustomerHttpProvider {
         .pipe(
           flatMap( token => {
             formData.append('token', token);
-            return this.http.post<{token: string}>(`http://whatsapp-laravel.test/api/customers`, formData);
+            return this.http.post<{token: string}>(`${environment.api.url}/customers`, formData);
           })
 
         );
