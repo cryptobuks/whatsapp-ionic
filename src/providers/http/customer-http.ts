@@ -58,7 +58,7 @@ export class CustomerHttpProvider {
     .pipe(
       flatMap( token => {        
         return this.http
-        .post<{token: string}>(`http://whatsapp-laravel.test/api/customers/phone_numbers`, {
+        .post<{token: string}>(`${environment.api.url}/customers/phone_numbers`, {
           email, token
         });
       })
