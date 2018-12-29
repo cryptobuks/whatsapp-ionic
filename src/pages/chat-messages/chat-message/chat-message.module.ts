@@ -8,6 +8,7 @@ import { ChatContentRightComponent } from '../chat-content-right/chat-content-ri
 import { ChatFooterComponent } from '../chat-footer/chat-footer';
 import { MomentModule } from 'ngx-moment';
 import { PipesModule } from '../../../pipes/pipes.module';
+import { LongPressModule } from 'ionic-long-press';
 
 
 @NgModule({
@@ -22,8 +23,8 @@ import { PipesModule } from '../../../pipes/pipes.module';
   imports: [
     IonicPageModule.forChild(ChatMessagePage),
     MomentModule,
-    PipesModule
-
+    PipesModule,
+    LongPressModule
   ],
 })
 export class ChatMessagePageModule {}

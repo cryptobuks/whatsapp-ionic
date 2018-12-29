@@ -67,8 +67,8 @@ function jwtFactory(authService: AuthProvider) {
         useFactory: jwtFactory,
         deps: [AuthProvider]
       }
-    })
-    
+    })   
+     
   ],
   bootstrap: [IonicApp],
   entryComponents: [
