@@ -16,7 +16,7 @@ export class ChatMessageHttpProvider {
   constructor(public http: HttpClient) {
   }
 
-  create(chatGroupId: number, data: { content,type}): Observable<any> {
+  create(chatGroupId: number, data: { content: string | Blob, type: string}): Observable<any> {
     const formData = new FormData();
     const chatGroupUrl = `${environment.api.url}/chat_groups/${chatGroupId}/messages`;
     formData.append('content', data.content);

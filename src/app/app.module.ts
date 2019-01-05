@@ -27,10 +27,16 @@ import { ChatGroupListComponent } from '../components/chat-group-list/chat-group
 import { ChatMessagePageModule } from '../pages/chat-messages/chat-message/chat-message.module';
 import { ChatMessageHttpProvider } from '../providers/http/chat-message-http';
 
+import { Media } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
+
+
+
 function jwtFactory(authService: AuthProvider) {
   return {
       whitelistedDomains: [
-        new RegExp('whatsapp-laravel.test/*')
+        new RegExp('whatsapp-laravel.test/*'),
+        new RegExp('192.168.0.106:8000/*')
       ],
       tokenGetter: () => {
         return authService.getToken();
@@ -68,7 +74,7 @@ function jwtFactory(authService: AuthProvider) {
         deps: [AuthProvider]
       }
     })   
-     
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -92,7 +98,9 @@ function jwtFactory(authService: AuthProvider) {
     FirebaseAuthProvider,
     AuthProvider,
     CustomerHttpProvider,
-    ChatMessageHttpProvider
+    ChatMessageHttpProvider,
+    Media,
+    File
   ]
 })
 export class AppModule {}
