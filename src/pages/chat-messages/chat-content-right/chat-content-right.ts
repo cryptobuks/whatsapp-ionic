@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ChatMenssage } from '../../../app/model';
+import { ChatMessage } from '../../../app/model';
 
 /**
  * Generated class for the ChatContentRightComponent component.
@@ -14,7 +14,7 @@ import { ChatMenssage } from '../../../app/model';
 export class ChatContentRightComponent {
 
   @Input()
-  message: ChatMenssage;
+  message: ChatMessage;
 
   constructor() {
   }

@@ -3,8 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { AuthProvider } from '../providers/auth/auth';
 
+import { AuthProvider } from '../providers/auth/auth';
+import { ChatGroupFbProvider } from '../providers/firebase/chat-group-fb';
+import { ChatMessageHttpProvider } from '../providers/http/chat-message-http';
+import { CustomerHttpProvider } from '../providers/http/customer-http';
+import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
 
 import { SuperTabsModule } from 'ionic2-super-tabs';
 
@@ -19,13 +23,10 @@ import { LoginOptionsPage } from '../pages/login-options/login-options';
 import { CustomerCreatePage } from '../pages/customer-create/customer-create';
 
 import { ResetPhoneNumberPage } from '../pages/reset-phone-number/reset-phone-number';
-import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CustomerHttpProvider } from '../providers/http/customer-http';
 import { ChatGroupListComponent } from '../components/chat-group-list/chat-group-list';
 import { ChatMessagePageModule } from '../pages/chat-messages/chat-message/chat-message.module';
-import { ChatMessageHttpProvider } from '../providers/http/chat-message-http';
 
 import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
@@ -100,7 +101,8 @@ function jwtFactory(authService: AuthProvider) {
     CustomerHttpProvider,
     ChatMessageHttpProvider,
     Media,
-    File
+    File,
+    ChatGroupFbProvider
   ]
 })
 export class AppModule {}

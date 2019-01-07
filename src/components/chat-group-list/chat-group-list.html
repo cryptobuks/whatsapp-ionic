@@ -1,12 +1,30 @@
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let group of groups">
+    <ion-item *ngFor="let group of groups" 
+      [hidden]="!(group.is_member|async)">
       <ion-avatar item-start>
-        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" 
-             alt="">
+        <img src="https://secure.gravatar.com/avatar/8d0153955da67e7593b0cca28e3e4d75.jpg?s=150&r=g&d=mm">
       </ion-avatar>
       <h2>{{group.name}}</h2>
-      <h3>Mensagem do chat. qauais as caracteristicas</h3>
+      <h3>
+          <ng-container *ngIf="group.last_message|async as message">
+              <span *ngIf="message.type === 'text'">
+                 {{message.user.name}}: {{formatTextMessage(message)}}
+              </span>
+              <span *ngIf="message.type === 'audio'">
+                  {{message.user.name}}: {{formatTextMessage(message)}}
+                  <ion-icon name="mic">Audio</ion-icon>
+              </span>
+              <span *ngIf="message.type === 'image'">
+                  {{message.user.name}}: {{formatTextMessage(message)}}
+                  <ion-icon name="images">Image</ion-icon>
+              </span>
+          </ng-container>
+        
+          <!--{{(group.last_message|async)?.content}}-->    
+      </h3>
     </ion-item>
   </ion-list>  
 </ion-content>
+
+

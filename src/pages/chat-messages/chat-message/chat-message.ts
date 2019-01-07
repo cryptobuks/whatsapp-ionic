@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { FirebaseAuthProvider } from './../../../providers/auth/firebase-auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ChatMenssage } from '../../../app/model';
+import { ChatMessage } from '../../../app/model';
 
 /**
  * Generated class for the ChatMessagePage page.
@@ -18,7 +18,7 @@ import { ChatMenssage } from '../../../app/model';
 })
 export class ChatMessagePage {
 
-  messages: ChatMenssage[] = [];
+  messages: ChatMessage[] = [];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
