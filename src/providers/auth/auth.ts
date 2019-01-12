@@ -10,6 +10,8 @@ import { environment } from '@app/env';
 
 const TOKEN_KEY = 'code_shopping_token';
 
+
+
 /*
   Generated class for the AuthProvider provider.
 
@@ -23,6 +25,7 @@ export class AuthProvider {
 
   constructor(private http: HttpClient, private firebaseAuth: FirebaseAuthProvider) {
     const token = this.getToken();
+    //console.log(token);
     this.setUserFromToken(token);
   }
 
@@ -57,6 +60,7 @@ export class AuthProvider {
 
 
   getToken(): string | null{
+    
     return window.localStorage.getItem(TOKEN_KEY);
   }
 

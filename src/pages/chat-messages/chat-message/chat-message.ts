@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs/Observable';
-import { FirebaseAuthProvider } from './../../../providers/auth/firebase-auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ChatMessage } from '../../../app/model';
+import { ChatMessage, ChatGroup } from '../../../app/model';
+import { ChatMessageFbProvider } from './../../../providers/firebase/chat-message-fb';
+
 
 /**
  * Generated class for the ChatMessagePage page.
@@ -18,32 +18,23 @@ import { ChatMessage } from '../../../app/model';
 })
 export class ChatMessagePage {
 
+  chatGroup: ChatGroup;
   messages: ChatMessage[] = [];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private firebaseAuth: FirebaseAuthProvider) {
+              private chatMessageFb: ChatMessageFbProvider) {
+    //this.chatGroup = this.navParams.get('chat_group');
+    this.chatGroup = {
+      id: 1,
+      name: '',
+      photo_url: '',
+    }          
   }
 
   ionViewDidLoad() {
-
-    const database = this.firebaseAuth.firebase.database();
-    database.ref('chat_groups/1/messages').on('child_added', (data) => {
-      const message = data.val();
-      message.user = Observable.create((observer) => {
-        database.ref(`users/${message.user_id}`).on('value', (data) => {
-          //mensage.name
-          const user = data.val();
-          observer.next(user);
-          //console.log(message);
-        });
-      });
-
-      //message.user.subscribe((user) => console.log(user));
-      this.messages.push(message);
-
-    });
-
+    this.chatMessageFb.latest(this.chatGroup)
+        .subscribe((messages) => this.messages = messages);
   }
 
 }

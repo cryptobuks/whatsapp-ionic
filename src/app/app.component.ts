@@ -6,8 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { TestePage } from '../pages/teste/teste';
+import { MainPage } from '../pages/main/main';
 
-import { MainPage } from './../pages/main/main';
+
 //import { ChatMessagePage } from './../pages/chat-messages/chat-message/chat-message';
 //import { LoginPhoneNumberPage } from './../pages/login-phone-number/login-phone-number';
 //import { ChatGroupListComponent } from './../components/chat-group-list/chat-group-list';

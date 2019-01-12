@@ -22,22 +22,22 @@ export class ChatGroupFbProvider {
   }
 
 
-  list(): Observable<ChatGroup[]> {
-    return Observable.create((observer) => {
-        this.database.ref('chat_groups').orderByChild('updated_at').once('value', (data) => {
-          const groupsRaw = data.val() as Array<ChatGroup>;
-          const groupsKeys = Object.keys(groupsRaw);
-          const groups = [];
-          for (const key of groupsKeys) {
-              groupsRaw[key].is_member = this.getMember(groupsRaw[key]);
-              groupsRaw[key].last_message = this.getLastMessage(groupsRaw[key]);
-              groups.push(groupsRaw[key]);
-          }
-         
-          observer._next(groups);
-        }, (error) => console.log(error));
-    });
-  }
+    list(): Observable<ChatGroup[]> {
+        return Observable.create((observer) => {
+            this.database.ref('chat_groups')
+                .orderByChild('updated_at')
+                .once('value', (data) => {
+                    const groups = [];
+                    data.forEach((child) => {
+                        const group = child.val() as ChatGroup;
+                        group.is_member = this.getMember(group);
+                        group.last_message = this.getLastMessage(group);
+                        groups.unshift(group);
+                    });
+                    observer._next(groups)
+                }, (error) => console.log(error));
+        });
+    }
 
 
   onAdded(): Observable<ChatGroup> {
@@ -54,6 +54,18 @@ export class ChatGroupFbProvider {
     });
   }
 
+
+  onChanged(): Observable<ChatGroup> {
+    return Observable.create((observer) => {
+        this.database.ref('chat_groups')
+            .on('child_changed', (data) => {
+            const group = data.val() as ChatGroup;
+              group.is_member = this.getMember(group);
+              group.last_message = this.getLastMessage(group);         
+              observer._next(group);
+        }, (error) => console.log(error));
+    });
+  }
 
   private getMember(group: ChatGroup): Observable<boolean> {
     return Observable.create(observer => {

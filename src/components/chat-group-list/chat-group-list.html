@@ -1,9 +1,10 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let group of groups" 
-      [hidden]="!(group.is_member|async)">
+      [hidden]="!(group.is_member|async)"
+      (click)="goToMessages(group)">
       <ion-avatar item-start>
-        <img src="https://secure.gravatar.com/avatar/8d0153955da67e7593b0cca28e3e4d75.jpg?s=150&r=g&d=mm">
+        <img [src]="group.photo_url | buildUrl">
       </ion-avatar>
       <h2>{{group.name}}</h2>
       <h3>
@@ -27,4 +28,4 @@
   </ion-list>  
 </ion-content>
 
-
+<!-- https://secure.gravatar.com/avatar/8d0153955da67e7593b0cca28e3e4d75.jpg?s=150&r=g&d=mm -->

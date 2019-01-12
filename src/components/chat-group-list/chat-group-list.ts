@@ -1,8 +1,9 @@
-import { Component, group } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChatGroup, ChatMessage } from '../../app/model';
-//import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
+//import { FirebaseAuthProvider } from "../../providers/auth/firebase-auth";
 import { ChatGroupFbProvider } from '../../providers/firebase/chat-group-fb';
-
+import { ChatMessagePage } from './../../pages/chat-messages/chat-message/chat-message';
+import { App } from 'ionic-angular';
 
 
 
@@ -26,7 +27,9 @@ export class ChatGroupListComponent {
   }
   */
 
-  constructor(private chatGroupFb: ChatGroupFbProvider) {}
+  constructor(private chatGroupFb: ChatGroupFbProvider, 
+              private app: App) {
+  }
 
 
 
@@ -41,10 +44,16 @@ export class ChatGroupListComponent {
           this.groups.unshift(group);
         });
 
-
-
-
-
+    this.chatGroupFb
+        .onChanged()
+        .subscribe((group) => {
+          const index = this.groups.findIndex((g => g.id === group.id));
+          if (index === 1) {
+            return;
+          }
+          this.groups.slice(index, 1);
+          this.groups.unshift(group);
+        });
 
     // Conecta ao BD Firebase    
     //const database = this.firebaseAuth.firebase.database();
@@ -73,13 +82,17 @@ export class ChatGroupListComponent {
       if (index !== -1) {
         this.groups[index] = group;
       }
-    });
-    
+    });    
     */ 
   }
 
   formatTextMessage(message: ChatMessage){
     return message.content.length > 20 ? message.content.slice(0,20)+'...' :  message.content;
+  }
+
+
+  goToMessages(group: ChatGroup){
+    this.app.getRootNav().push(ChatMessagePage, {'chat_group': group});
   }
 
 }

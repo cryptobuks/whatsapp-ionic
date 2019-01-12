@@ -1,4 +1,3 @@
-import { LoginPhoneNumberPage } from './../pages/login-phone-number/login-phone-number';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -11,6 +10,7 @@ import { CustomerHttpProvider } from '../providers/http/customer-http';
 import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
 
 import { SuperTabsModule } from 'ionic2-super-tabs';
+import { PipesModule } from './../pipes/pipes.module';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -19,8 +19,10 @@ import { MainPage } from './../pages/main/main';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TestePage } from '../pages/teste/teste';
+import { LoginPhoneNumberPage } from './../pages/login-phone-number/login-phone-number';
 import { LoginOptionsPage } from '../pages/login-options/login-options';
 import { CustomerCreatePage } from '../pages/customer-create/customer-create';
+
 
 import { ResetPhoneNumberPage } from '../pages/reset-phone-number/reset-phone-number';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,7 +39,9 @@ function jwtFactory(authService: AuthProvider) {
   return {
       whitelistedDomains: [
         new RegExp('whatsapp-laravel.test/*'),
-        new RegExp('192.168.0.106:8000/*')
+        //new RegExp('192.168.0.106:8000/*'),
+        new RegExp('192.168.1.7:8000/*')
+
       ],
       tokenGetter: () => {
         return authService.getToken();
@@ -68,6 +72,7 @@ function jwtFactory(authService: AuthProvider) {
     ReactiveFormsModule,
     SuperTabsModule.forRoot(),
     ChatMessagePageModule,
+    PipesModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,
